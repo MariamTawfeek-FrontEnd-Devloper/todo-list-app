@@ -8,6 +8,14 @@ The application helps users organize their daily tasks with a clean interface, i
 
 [View Live Demo](https://mariamtawfeek-frontend-devloper.github.io/todo-list-app/)
 
+## Screenshots
+
+### Desktop View
+![Todo List Desktop](images/todo-list-desktop.png)
+
+### Mobile View
+![Todo List Mobile](images/todo-list-mobile.png)
+
 ## Features
 
 - Add new tasks.
