@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Todo app</title>
+
+    <!-- الخط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- ملف الـ CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Header -->
+      <header class="app-header">
+        <div>
+          <h1>My Todo</h1>
+          <p>Make today count ✨</p>
+        </div>
+        <button id="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <span aria-hidden="true">🌙</span>
+        </button>
+      </header>
+
+      <!-- New todo form -->
+      <form id="todo-form">
+        <div class="list-heading">
+          <h2>My Tasks</h2>
+        </div>
+        <input
+          type="text"
+          id="new-todo"
+          placeholder="Create a new todo..."
+          aria-label="Create a new todo"
+          autocomplete="off" />
+      </form>
+
+      <!-- Todo list -->
+      <ul id="todo-list"></ul>
+
+      <!-- Footer -->
+      <footer class="todo-footer">
+        <p><span id="items-left">0</span> items left</p>
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button id="all" class="filter-btn active" data-filter="all" type="button">All</button>
+          <button id="active" class="filter-btn" data-filter="active" type="button">Active</button>
+          <button id="completed" class="filter-btn" data-filter="completed" type="button">Completed</button>
+        </div>
+        <button id="clear-completed" type="button">Clear Completed</button>
+      </footer>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
+</html>

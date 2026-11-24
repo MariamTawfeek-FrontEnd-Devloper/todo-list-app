@@ -1,0 +1,497 @@
+/* ========================================
+   1. Design tokens (Light + Dark)
+======================================== */
+
+:root {
+  --bg-page: #f5f1fa;
+  --bg-card: #ffffff;
+  --bg-hover: #f8f5fd;
+
+  --text-main: #403653;
+  --text-muted: #766c88;
+  --text-completed: #b3aac0;
+
+  --border: #eee8f5;
+  --check-border: #cfc6dc;
+
+  --accent: #8b72b9;
+  --accent-strong: #6f55a3; /* للنص والزرار النشط (تباين أعلى) */
+  --check-gradient: linear-gradient(135deg, #b9a5d8, #8b72b9);
+
+  --danger: #a4573a;
+  --danger-bg: #f8eee7;
+
+  --hero: linear-gradient(120deg, #4b3a70, #8b72b9 60%, #b9a5d8);
+
+  --shadow-sm: 0 8px 24px rgba(75, 58, 112, 0.1);
+  --shadow-lg: 0 18px 40px rgba(75, 58, 112, 0.16);
+
+  --radius: 16px;
+}
+
+[data-theme="dark"] {
+  --bg-page: #292631;
+  --bg-card: #403a4c;
+  --bg-hover: #403a4c;
+
+  --text-main: #e8e2f2;
+  --text-muted: #a198b4;
+  --text-completed: #817891;
+
+  --border: #494253;
+  --check-border: #5e536f;
+
+  --accent: #b69ce5;
+  --accent-strong: #9276c9;
+
+  --danger: #e2a089;
+  --danger-bg: #3a2a2a;
+
+  --hero: linear-gradient(120deg, #2a2145, #4b3a70 60%, #6b55a0);
+  --bg-input: #494354;
+
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================================
+   2. Reset & Base
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* الخلفية البنفسجية في الأعلى */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 300px;
+  border-radius: 0 0 40px 40px;
+  background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.16), transparent 40%), var(--hero);
+  z-index: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ========================================
+   3. Layout
+======================================== */
+
+main {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 40px, 540px);
+  margin: 0 auto;
+  padding: 72px 0 56px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.app-header h1 {
+  color: #fff;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+}
+
+.app-header p {
+  margin-top: 8px;
+  color: #f3eefb;
+  font-size: 1rem;
+}
+
+/* ========================================
+   4. Theme Toggle
+======================================== */
+
+#theme-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  font-size: 1.2rem;
+
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+#theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(15deg);
+}
+
+#theme-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   5. Todo Form
+======================================== */
+
+#todo-form {
+  margin-bottom: 24px;
+}
+
+.list-heading h2 {
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+#new-todo {
+  width: 100%;
+  padding: 20px 24px;
+
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-main);
+  background: var(--bg-card);
+
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.3s ease;
+}
+
+#new-todo::placeholder {
+  color: var(--text-muted);
+}
+
+#new-todo:focus {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px rgba(139, 114, 185, 0.22),
+    var(--shadow-lg);
+}
+
+/* ========================================
+   6. Todo List
+======================================== */
+
+#todo-list {
+  list-style: none;
+  overflow: hidden;
+
+  background: var(--bg-card);
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: var(--shadow-lg);
+  transition: background 0.3s ease;
+}
+
+/* حالة القائمة الفاضية */
+#todo-list:empty {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+}
+
+#todo-list:empty::after {
+  content: "No tasks yet. Add your first one above ✨";
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: var(--bg-hover);
+}
+
+.todo-text {
+  flex: 1;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+  min-width: 0;
+}
+
+.todo-item.completed .todo-text {
+  color: var(--text-completed);
+  text-decoration: line-through;
+}
+
+/* ========================================
+   7. Checkbox
+======================================== */
+
+.todo-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+
+  background: transparent;
+  border: 1.5px solid var(--check-border);
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.todo-item input[type="checkbox"]:hover {
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.todo-item input[type="checkbox"]:checked {
+  background:
+    url("../images/icon-check.svg") center no-repeat,
+    var(--check-gradient);
+  border-color: transparent;
+}
+
+.todo-item input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ========================================
+   8. Delete Button
+======================================== */
+
+.delete-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--danger);
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+}
+
+.delete-btn:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: 2px;
+}
+/* ========================================
+   8. Edit Button
+======================================== */
+
+.edit-btn {
+  background: var(--bg-hover);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-family: inherit;
+  transition: background 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: var(--border);
+}
+
+/* ========================================
+   8. Edit input
+======================================== */
+.edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-main);
+  background: var(--bg-hover);
+
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  outline: none;
+
+  transition:
+    box-shadow 0.2s ease,
+    background 0.3s ease;
+}
+
+.edit-input:focus {
+  box-shadow: 0 0 0 3px rgba(139, 114, 185, 0.22);
+}
+
+/* ========================================
+   9. Footer
+======================================== */
+
+.todo-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 15px;
+  padding: 14px 20px;
+
+  font-size: 0.85rem;
+  color: var(--text-muted);
+
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow-lg);
+  transition: background 0.3s ease;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-btn,
+#clear-completed {
+  font-size: inherit;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+}
+
+#clear-completed {
+  padding: 6px 10px;
+}
+
+.filter-btn:hover:not(.active),
+#clear-completed:hover {
+  color: var(--text-main);
+  background: var(--bg-hover);
+}
+
+.filter-btn.active {
+  color: #fff;
+  background: var(--accent-strong);
+}
+
+.filter-btn:focus-visible,
+#clear-completed:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   10. Responsive
+======================================== */
+
+@media (max-width: 600px) {
+  main {
+    padding-top: 52px;
+  }
+
+  .app-header h1 {
+    font-size: 2.1rem;
+  }
+
+  .todo-item {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+
+  .todo-footer {
+    justify-content: space-between;
+  }
+
+  .filters {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+}
+
+/* ========================================
+   11. Reduced Motion
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
