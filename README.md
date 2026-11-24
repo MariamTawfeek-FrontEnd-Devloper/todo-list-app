@@ -11,10 +11,10 @@ The application helps users organize their daily tasks with a clean interface, i
 ## Screenshots
 
 ### Desktop View
-![Todo List Desktop](https://mariamtawfeek-frontend-devloper.github.io/images/Desktop.jpg)
+![Todo List Desktop](https://mariamtawfeek-frontend-devloper.github.io/images/Desktop.jpeg)
 
 ### Mobile View
-![Todo List Mobile](https://mariamtawfeek-frontend-devloper.github.io/images/Mobile.jpg)
+![Todo List Mobile](https://mariamtawfeek-frontend-devloper.github.io/images/Mobile.jpeg)
 
 ## Features
 
