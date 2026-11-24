@@ -11,7 +11,7 @@ The application helps users organize their daily tasks with a clean interface, i
 ## Screenshots
 
 ### Desktop View
-![Todo List Desktop](images/Mobile.jpeg)
+![Todo List Desktop](images/Desktop.jpeg)
 
 ### Mobile View
 ![Todo List Mobile](images/Mobile.jpeg)
